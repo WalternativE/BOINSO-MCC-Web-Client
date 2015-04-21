@@ -1,12 +1,12 @@
 'use strict';
 
 boinsoMCCApp.factory('clientService',
-    ['$http', function($http) {
+    ['$http', 'CONFIG', function($http, CONFIG) {
 
         var getClient = function(username, password) {
             return $http({
                 method:"GET",
-                url:'http://localhost:8000/api/login/',
+                url:CONFIG.BACKEND_URL + 'api/login/',
                 headers: {Authorization: 'Basic ' + btoa(username + ':' + password)}
 
             }).

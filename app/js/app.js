@@ -2,7 +2,9 @@
 
 var boinsoMCCApp = angular.module('boinsoMCCApp', [
         'ngResource',
-        'ngRoute'
+        'ngRoute',
+        'angular-storage',
+        'ui.bootstrap'
     ]);
 
 boinsoMCCApp.config(function($routeProvider, $locationProvider, $httpProvider) {
@@ -16,5 +18,10 @@ boinsoMCCApp.config(function($routeProvider, $locationProvider, $httpProvider) {
 
         $httpProvider.defaults.useXDomain = true;
         delete $httpProvider.defaults.headers.common['X-Requested-With'];
+
     }
 );
+
+boinsoMCCApp.constant("CONFIG", {
+    "BACKEND_URL": "http://localhost:8000/"
+});

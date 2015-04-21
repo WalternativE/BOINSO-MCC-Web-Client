@@ -1,12 +1,12 @@
 'use strict';
 
 boinsoMCCApp.factory('authService',
-    ['$http', function($http) {
+    ['$http', 'CONFIG', function($http, CONFIG) {
 
         var getAuthToken = function(client_id, client_secret, username, password) {
             return $http({
                 method:"POST",
-                url:'http://localhost:8000/o/token/',
+                url: CONFIG.BACKEND_URL + 'o/token/',
                 headers: {'Content-Type': 'application/x-www-form-urlencoded'},
                 data: $.param({
                             client_id: client_id,
