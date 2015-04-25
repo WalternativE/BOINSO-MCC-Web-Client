@@ -5,7 +5,7 @@ boinsoMCCApp.factory('sessionLostInterceptor',
 
         var sessionRecoverer = {
             responseError: function(response) {
-                
+
             }
         }
 

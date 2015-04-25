@@ -18,8 +18,9 @@
     "app/components/"
   ],
   "dependencies": {
-      "a0-angular-storage": "~0.0.10",
-      "angular-bootstrap": "~0.12.1"
+    "a0-angular-storage": "~0.0.10",
+    "angular-bootstrap": "~0.12.1",
+    "angular-ui-router": "~0.2.13"
   },
   "license": "Apache 2.0"
 }

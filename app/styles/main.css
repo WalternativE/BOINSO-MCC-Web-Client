@@ -6739,7 +6739,8 @@ nav {
 .navbar {
   padding-top: 20px;
   padding-bottom: 20px;
+  padding-right: 20px;
 }
-[ng-view] {
+[ui-view] {
   padding: 0px;
 }
