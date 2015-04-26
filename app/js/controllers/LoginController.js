@@ -4,26 +4,19 @@ angular.module('boinsoMCCApp').controller('LoginController', [
     '$scope', 'authService', '$state', 'store',
     function($scope, authService, $state, store) {
 
-        $scope.alerts = [];
-
-        $scope.alerts = function(index) {
-            $scope.alerts.splice(index, 1);
-        };
-
-        if (!store.get('auth_token')) {
-            $scope.loggedIn = false;
-        } else {
-            $scope.loggedIn = true;
-        }
+        $scope.loggedIn = authService.getLoggedInStatus;
 
         $scope.login = function() {
             authService.login();
-            $scope.loggedIn = true;
+        }
+
+        $scope.register = function() {
+            authService.register();
         }
 
         $scope.logout = function() {
             store.remove('auth_token');
-            $scope.loggedIn = false;
+            authService.setLoggedInStatus(false);
             $state.go('home');
         };
     }]

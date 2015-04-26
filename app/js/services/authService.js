@@ -6,7 +6,29 @@ boinsoMCCApp.factory('authService', [
     'store',
     '$modal',
     '$state',
-        function($http, CONFIG, store, $modal, $state) {
+    '$q',
+        function($http, CONFIG, store, $modal, $state, $q) {
+
+            var loggedIn = undefined;
+
+            var initLoggedInStatus = function() {
+                if (!store.get('auth_token')) {
+                    loggedIn = false;
+                } else {
+                    loggedIn = true;
+                }
+            };
+
+            var setLoggedInStatus = function(status) {
+                loggedIn = status;
+            };
+
+            var getLoggedInStatus = function() {
+                if (loggedIn == undefined) {
+                    initLoggedInStatus();
+                }
+                return loggedIn;
+            };
 
             var getAuthToken = function(client_id, client_secret, username, password) {
                 return $http({
@@ -39,47 +61,44 @@ boinsoMCCApp.factory('authService', [
             };
 
             var login = function() {
+
                 var modalInstance = $modal.open({
                     templateUrl: 'templates/modals/loginModal.html',
                     controller: 'LoginModalController'
                 });
 
                 return modalInstance.result.then(function (res) {
-                    console.log(res);
 
                     var clientPromise = getClient(res.userName, res.password);
                     clientPromise.then(function(result) {
-                        console.log(result);
 
                         if (result != undefined && result.status == 200) {
                             var client = result.data[0];
                             var token = getAuthToken(client.client_id, client.client_secret, res.userName, res.password);
                             token.then(function(res) {
-                                console.log(res);
                                 store.set('auth_token', res.data);
+                                setLoggedInStatus(true);
                             });
                         }
                     });
                 });
             };
 
+            var register = function() {
+
+                var modalInstance = $modal.open({
+                    templateUrl: 'templates/modals/registrationModal.html',
+                    controller: 'LoginModalController'
+                });
+
+            };
+
             return {
-                login: login
+                login: login,
+                register: register,
+                getLoggedInStatus: getLoggedInStatus,
+                setLoggedInStatus: setLoggedInStatus
             };
         }
     ]
 );
-
-// boinsoMCCApp.config([
-//     '$httpProvider', 'authService', function($httpProvider, authService) {
-//         $httpProvider.interceptors.push(function(authService) {
-//             return {
-//                 responseError: function(rejection) {
-//                     if (rejection.status === 401) {
-//                         console.log('bubuuuuuuu!');
-//                     }
-//                 }
-//             };
-//         });
-//     }]
-// );

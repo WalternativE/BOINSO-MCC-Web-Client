@@ -29,8 +29,8 @@
                     <ul class="nav navbar-nav navbar-right" ng-cloak>
                         <li><a ui-sref="home">Home</a></li>
                         <li><a ui-sref="profile">Profile</a></li>
-                        <li><button class="btn btn-default navbar-btn" ng-hide="loggedIn" ng-click="login()">Login</button></li>
-                        <li><button class="btn btn-default navbar-btn" ng-show="loggedIn" ng-click="logout()">Logout</button></li>
+                        <li><button class="btn btn-default navbar-btn" ng-hide="loggedIn()" ng-click="login()">Login</button></li>
+                        <li><button class="btn btn-default navbar-btn" ng-show="loggedIn()" ng-click="logout()">Logout</button></li>
                     </ul>
                 </div>
             </div>
