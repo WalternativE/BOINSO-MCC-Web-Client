@@ -36,12 +36,15 @@ angular.module('boinsoMCCApp').config([
                         var authService = $injector.get('authService');
                         var $state = $injector.get('$state');
                         var store = $injector.get('store');
+                        var $q = $injector.get('$q');
 
                         if (rejection.status === 401) {
                             $state.go('home');
                             store.remove('auth_token');
                             authService.login();
                         }
+
+                        return $q.reject(rejection);
                     }
                 };
             }]);

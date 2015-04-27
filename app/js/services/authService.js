@@ -60,6 +60,19 @@ boinsoMCCApp.factory('authService', [
                 });
             };
 
+            var registerClient = function(data) {
+                return $http({
+                    method: "POST",
+                    url: CONFIG.BACKEND_URL + 'api/sign_up/',
+                    data: data
+                })
+                .then(function(result) {
+                    return result;
+                }, function(result) {
+                    return result;
+                });
+            };
+
             var login = function() {
 
                 var modalInstance = $modal.open({
@@ -67,7 +80,7 @@ boinsoMCCApp.factory('authService', [
                     controller: 'LoginModalController'
                 });
 
-                return modalInstance.result.then(function (res) {
+                return modalInstance.result.then(function(res) {
 
                     var clientPromise = getClient(res.userName, res.password);
                     clientPromise.then(function(result) {
@@ -89,6 +102,34 @@ boinsoMCCApp.factory('authService', [
                 var modalInstance = $modal.open({
                     templateUrl: 'templates/modals/registrationModal.html',
                     controller: 'LoginModalController'
+                });
+
+                return modalInstance.result.then(function(res) {
+
+                    var data = {
+                        username: res.userName,
+                        email: res.userEmail,
+                        password: res.password
+                    };
+
+                    var registrationPromise = registerClient(data);
+                    registrationPromise.then(function(res) {
+
+                        if (res.status == 201) {
+                            var token = getAuthToken(res.data.client_id, res.data.client_secret, data.username, data.password);
+                            console.log(token);
+                            token.then(function(res) {
+                                store.set('auth_token', res.data);
+                                setLoggedInStatus(true);
+                            });
+                        } else if (res.status == 400) {
+                            //maybe it's a good idea to have an alert array in this service
+                            //they could be displayed site wide and could be dismissed easyly
+                            //if this is possible I might get around using alerts
+                            alert('Something went wrong...most likely the username is taken.');
+                        }
+
+                    });
                 });
 
             };
