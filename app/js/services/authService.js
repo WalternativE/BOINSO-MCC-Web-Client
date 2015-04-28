@@ -117,7 +117,6 @@ boinsoMCCApp.factory('authService', [
 
                         if (res.status == 201) {
                             var token = getAuthToken(res.data.client_id, res.data.client_secret, data.username, data.password);
-                            console.log(token);
                             token.then(function(res) {
                                 store.set('auth_token', res.data);
                                 setLoggedInStatus(true);
