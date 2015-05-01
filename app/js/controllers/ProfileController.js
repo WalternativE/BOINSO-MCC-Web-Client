@@ -4,7 +4,8 @@ boinsoMCCApp.controller('ProfileController', [
     '$scope',
 	'userData',
 	'userProfile',
-        function($scope, userData, userProfile) {
+	'userResource',
+        function($scope, userData, userProfile, userResource) {
 			$scope.test = "This is a test";
 			
 			$scope.userData = userData.getUser();
@@ -21,10 +22,13 @@ boinsoMCCApp.controller('ProfileController', [
 				console.log("user_id: " + user_id + " user_profile_id: " + user_profile_id);
 				
 				$scope.profile = userProfile.get({id: user_profile_id});
-//				$scope.profile.then(function(res) {
-//					console.log(res);
-//				});
 				$scope.profile.$promise.then(function(res) {
+						console.log(res);
+					}
+				);
+				
+				$scope.user = userResource.get({id: user_id});
+				$scope.user.$promise.then(function (res) {
 						console.log(res);
 					}
 				);
