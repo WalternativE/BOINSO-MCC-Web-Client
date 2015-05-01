@@ -5,7 +5,8 @@ angular.module('boinsoMCCApp').config([
     '$urlRouterProvider',
     '$locationProvider',
     '$httpProvider',
-        function($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
+    '$resourceProvider',
+        function($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider, $resourceProvider) {
 
             //for unmatched url
             $urlRouterProvider.otherwise("/home");
@@ -18,13 +19,16 @@ angular.module('boinsoMCCApp').config([
                 })
                 .state('profile', {
                     url: "/profile",
-                    templateUrl: "templates/Profile.html"
+                    templateUrl: "templates/Profile.html",
+                    controller: "ProfileController"
                 });
 
             $locationProvider.html5Mode(true);
 
             $httpProvider.defaults.useXDomain = true;
             delete $httpProvider.defaults.headers.common['X-Requested-With'];
+            
+            $resourceProvider.defaults.stripTrailingSlashes = false;
 
             $httpProvider.interceptors.push(['$injector', function($injector) {
                 return {
