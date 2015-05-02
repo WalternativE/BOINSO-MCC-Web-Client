@@ -1,6 +1,7 @@
+/// <reference path="../../../typings/angularjs/angular.d.ts"/>
 'use strict';
 
-boinsoMCCApp.factory('userProfile', [
+angular.module('boinsoMCCApp').factory('userProfile', [
     '$resource',
     'CONFIG',
     'store',

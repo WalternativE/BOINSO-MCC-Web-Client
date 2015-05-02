@@ -1,6 +1,7 @@
+/// <reference path="../../../typings/angularjs/angular.d.ts"/>
 'use strict';
 
-boinsoMCCApp.controller('ProfileController', [
+angular.module('boinsoMCCApp').controller('ProfileController', [
     '$scope',
     'userData',
     '$injector',

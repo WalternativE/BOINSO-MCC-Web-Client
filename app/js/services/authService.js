@@ -1,6 +1,8 @@
+/// <reference path="../../../typings/jquery/jquery.d.ts"/>
+/// <reference path="../../../typings/angularjs/angular.d.ts"/>
 'use strict';
 
-boinsoMCCApp.factory('authService', [
+angular.module('boinsoMCCApp').factory('authService', [
     '$http',
     'CONFIG',
     'store',

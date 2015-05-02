@@ -34,3 +34,4 @@ app/components
 
 # visual studio code stuff
 .settings
+typings

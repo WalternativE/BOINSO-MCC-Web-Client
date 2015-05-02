@@ -1,6 +1,7 @@
+/// <reference path="../../../typings/angularjs/angular.d.ts"/>
 'use strict';
 
-boinsoMCCApp.factory('mccConfig', function() {
+angular.module('boinsoMCCApp').factory('mccConfig', function() {
     var mccConfigInstance = {
         'MCC_NAME': "Test MCC",
     };
