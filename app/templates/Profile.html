@@ -1,6 +1,37 @@
 <div>
-    <section class="row test-section">
-        <h1>Profile</h1>
-        <p>{{test}}</p>
+    <section class="row profile-section">
+        <h1>Your personal profile</h1>
+        <p>Here lies your personal data!</p>
+    </section>
+    <section class="row profile-section">
+        <h2>User Identification</h2>
+        <p><strong>Username:</strong> {{user.username}}</p>
+        <p><strong>E-Mail:</strong> {{user.email}}</p>
+    </section>
+    <section class="row profile-section">
+        <h2>Profile Data</h2>
+        <div class="container-fluid">
+            <div class="row">
+                <form name="userProfileForm" class="col-md-6" id="userProfileForm">
+                    <div class="form-group">
+                        <label for="latitude">Latitude</label>
+                        <input type="number" class="form-control" id="latitude" ng-model='profile.latitude' required value="{{profile.latitude}}" ng-disabled="!isInEditMode"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="longitude">Longitude</label>
+                        <input type="number" class="form-control" id="longitude" ng-model="profile.longitude" required value="{{profile.longitude}}" ng-disabled="!isInEditMode"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="altitude">Altitude (in meters)</label>
+                        <input type="number" class="form-control" id="altitude" ng-model="profile.altitude" required value="{{profile.altitude}}" ng-disabled="!isInEditMode"/>
+                    </div>
+                </form>
+            </div>
+            <div class="row">
+                <button class="btn btn-primary" ng-click="startEdit()" ng-hide="isInEditMode">Edit</button>
+                <button class="btn btn-primary" ng-click="updateProfile()" ng-show="isInEditMode">Save</button>
+                <button class="btn btn-warning" ng-click="cancelEdit()" ng-show="isInEditMode">Cancel</button>
+            </div>
+        </div>
     </section>
 </div>
