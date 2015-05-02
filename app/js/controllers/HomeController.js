@@ -8,6 +8,7 @@ boinsoMCCApp.controller('HomeController', [
             $scope.mccName = mccConfig.MCC_NAME;
 
             $scope.register = authService.register;
+            $scope.loggedIn = authService.getLoggedInStatus;
         }
     ]
 );
