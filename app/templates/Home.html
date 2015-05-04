@@ -1,7 +1,15 @@
 <div>
-    <div class="jumbotron">
+    <section class="jumbotron">
         <h1>Welcome to {{mccName}}!</h1>
         <p>Be a part of the next step of interconnected space education. Register now and help to build the future!</p>
         <a class="btn btn-primary" ng-click="register()" ng-hide="loggedIn()">Register!</a>
-    </div>
+    </section>
+    <section class="row satellite-section">
+        <h2>Currently monitored satellites</h2>
+        <div ng-repeat="satellite in satellites" class="satellite-element">
+            <h3>{{satellite.name}}</h3>
+            <p><strong>Catalogue Number:</strong> {{satellite.catalogue_number}}</p>
+            <a ng-href="{{satellite.tle}}" class="btn btn-primary">Download TLE</a>
+        </div>
+    </section>
 </div>
